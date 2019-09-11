@@ -50,3 +50,19 @@
   padding-top: 1rem;
 }
 
+#info {
+  background-color: rgb(255, 255, 255);
+  border: red;
+  color: rgb(226, 191, 33);
+}
+
+#info:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: red !important;
+}
+/* 
+#submit-login-form:focus {
+  outline: none !important;
+  box-shadow: none !important;
+} */

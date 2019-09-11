@@ -16,7 +16,7 @@ class Navbar extends Component {
           Flashcard Hub
           </Header>
         <Menu.Menu position='right'>
-        <Modal id='instructions' basic size='small' trigger={<Button id='info'>How It Works</Button>}>
+        <Modal id='instructions' basic size='small' trigger={<Button basic color='grey' id='info'>How This Works</Button>}>
           <p>Text goes here</p>
         </Modal>
           <Menu.Item style={{ color: 'orange' }}
