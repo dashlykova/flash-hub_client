@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Menu, Header } from 'semantic-ui-react';
 import '../styling/customize.css';
+import LoginForm from './LoginForm';
 
 class Navbar extends Component {
   state = { }
@@ -14,14 +15,15 @@ class Navbar extends Component {
       <Menu id='navbar'>
         <Header position='left' id='header' style={{ color: 'brown', fontSize: '2rem', fontFamily: 'Lexend Giga' }}>
           Flashcard Hub
-          </Header>
+        </Header>
         <Menu.Menu position='right'>
           <Menu.Item style={{ color: 'orange' }}
-            name='login'
-            active={activeItem === 'login'}
-            onClick={this.handleItemClick}
+          id='login-button'
+          name='login'
+          active={activeItem === 'login'}
+          onClick={this.handleItemClick}
           >
-            Log In
+            <LoginForm />
           </Menu.Item>
           <Menu.Item style={{ color: '#E58869' }}
             name='signup'
