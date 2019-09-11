@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Header } from 'semantic-ui-react';
+import { Menu, Header, Modal, Button } from 'semantic-ui-react';
 import '../styling/customize.css';
 
 class Navbar extends Component {
@@ -16,6 +16,9 @@ class Navbar extends Component {
           Flashcard Hub
           </Header>
         <Menu.Menu position='right'>
+        <Modal id='instructions' basic size='small' trigger={<Button id='info'>How It Works</Button>}>
+          <p>Text goes here</p>
+        </Modal>
           <Menu.Item style={{ color: 'orange' }}
             name='login'
             active={activeItem === 'login'}
