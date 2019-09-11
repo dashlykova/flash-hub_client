@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 
 class LoginForm extends Component {
   state = {
-    email: [],
-    password: []
+    renderLoginForm: true,
+    email: "",
+    password: ""
   }
 
   loginHandler = e => {
@@ -14,16 +15,18 @@ class LoginForm extends Component {
     const { signInUser } = this.props;
     const { email, password } = this.state;
     signInUser({ email, password })
-    .then()
+    .then(() => {
+      this.setState({ renderLoginForm: false });
+      this.props.dispatchFlash(
+        `Hello ${this.props.currentUser.attributes.uid}!`,
+        "success"
+      );
+    })
     .catch(error => {
-      console.log('Error occured when trying to log in');
+      this.props.dispatchFlash(error.response.data.errors[0], "error");
     });
-      // try {
+};
 
-      // } catch (error) {
-      //   return console.log('Error occured when trying to log in');
-      // }
-  }
   render() {
     return (
       <>
@@ -68,7 +71,15 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = {
+  dispatchFlash: (message, status) => ({
+    type: "SHOW_FLASH_MESSAGE",
+    payload: { flashMessage: message, status: status }
+  }),
+  signInUser
+};
+
 export default connect(
   mapStateToProps,
-  { signInUser }
+  mapDispatchToProps,
 )(LoginForm);
