@@ -3,7 +3,7 @@ import { Menu, Header, Modal, Button } from 'semantic-ui-react';
 import '../styling/customize.css';
 
 class Navbar extends Component {
-  state = { }
+  state = {}
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -16,9 +16,13 @@ class Navbar extends Component {
           Flashcard Hub
           </Header>
         <Menu.Menu position='right'>
-        <Modal id='instructions' basic size='small' trigger={<Button basic color='grey' id='info'>How This Works</Button>}>
-          <p>Text goes here</p>
-        </Modal>
+          <Modal id='instructions' basic size='small' trigger={<Button basic color='grey' id='info'>How This Works</Button>}>
+            <ul>
+              <li>Coffee</li>
+              <li>Tea</li>
+              <li>Milk</li>
+            </ul>
+          </Modal>
           <Menu.Item style={{ color: 'orange' }}
             name='login'
             active={activeItem === 'login'}
