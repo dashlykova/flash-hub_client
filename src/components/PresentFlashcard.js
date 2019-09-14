@@ -4,6 +4,8 @@ import { updateFlashcardStatus } from "../modules/updateFlashcardStatus";
 import Flashcard from "./Flashcard";
 import { Container, Button, Grid } from 'semantic-ui-react';
 import CategoryButtons from './CategoryButtons';
+import { connect } from 'react-redux';
+
 
 
 export class PresentFlashcard extends Component {
@@ -16,7 +18,7 @@ export class PresentFlashcard extends Component {
   };
 
   async componentDidMount() {
-    const response = await axios.get("http://localhost:3000/api/decks");
+    const response = await axios.get("/api/decks");
     this.setState({
       flashcards: response.data.decks[0].flashcards,
       nextDeckPage: response.data.meta.nextPage,
@@ -35,9 +37,9 @@ export class PresentFlashcard extends Component {
     }
 
     if (this.state.onlySpecificTypeOfDeck === true) {
-      response = await axios.get(`http://localhost:3000/api/decks/?page=${page}&category=${this.state.deckCategory}`);
+      response = await axios.get(`/api/decks/?page=${page}&category=${this.state.deckCategory}`);
     } else {
-      response = await axios.get(`http://localhost:3000/api/decks/?page=${page}`);
+      response = await axios.get(`/api/decks/?page=${page}`);
     }
 
     this.setState({
@@ -60,7 +62,7 @@ export class PresentFlashcard extends Component {
   getCategoryDeck = async (event) => {
     let category = event.target.id
 
-    const response = await axios.get(`http://localhost:3000/api/decks/?category=${category}`);
+    const response = await axios.get(`/api/decks/?category=${category}`);
 
     this.setState({
       flashcards: response.data.decks[0].flashcards,
@@ -88,6 +90,26 @@ export class PresentFlashcard extends Component {
     });
   };
 
+
+  nextCard = (event) => {
+    if (event.target.id == 'next_button') {
+      if (this.state.activeFlashcard + 1 == 10) {
+        this.setState({
+          renderDeckOption: true
+        })
+      } else {
+        this.setState({
+          activeFlashcard: this.state.activeFlashcard + 1
+        })
+      }
+    } else {
+      this.setState({
+        activeFlashcard: this.state.activeFlashcard - 1
+      })
+    }
+
+  }
+
   render() {
     const flashcards = this.state.flashcards;
     let chooseDeckOption;
@@ -100,6 +122,9 @@ export class PresentFlashcard extends Component {
           key={flashcards[this.state.activeFlashcard].id}
           updateStatus={this.updateStatus}
           currentDeckCategory={this.state.deckCategory}
+          currentUserSignedIn={this.props.currentUser.isSignedIn}
+          nextCard={this.nextCard}
+          activeCard={this.state.activeFlashcard}
         />
       );
     };
@@ -147,4 +172,12 @@ export class PresentFlashcard extends Component {
   };
 };
 
-export default PresentFlashcard;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.reduxTokenAuth.currentUser
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(PresentFlashcard);
