@@ -57,11 +57,11 @@ class Navbar extends Component {
           Flashcard Hub
         </Header>
         <Menu.Menu position='right'>
-          <Modal id='instructions' basic size='small' trigger={<Button basic color='grey' id='info'>How This Works</Button>}>
-            <ul>
-              <li>Coffee</li>
-              <li>Tea</li>
-              <li>Milk</li>
+          <Modal id='instructions' basic size='small' trigger={<Button basic id='info'>How This Works</Button>}>
+            <ul id='list'>
+              <li>Click Red button if you would like to save and see the flashcard after finishing the deck</li>
+              <li>You got this, but you feel that you need a bit more practice. No problem! Just click yellow!</li>
+              <li>Click green to continue learning!</li>
             </ul>
           </Modal>
           <Menu.Item style={{ color: 'orange' }}

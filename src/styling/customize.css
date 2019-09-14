@@ -222,14 +222,25 @@
 
 #info {
   background-color: rgb(255, 255, 255);
-  border: red;
   color: rgb(226, 191, 33);
 }
 
 #info:focus {
   outline: none !important;
   box-shadow: none !important;
-  border: red !important;
+  border: none !important;
+}
+#instructions {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 100;
+  line-height: 35px;
+  color: #FCA17E;
+  margin: 0 auto!important;
+  top: auto !important;
+  left: auto !important;
+  transform-origin: center !important;
+  transition: all ease .5s;
 }
 /* 
 #submit-login-form:focus {
