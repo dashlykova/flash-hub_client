@@ -259,11 +259,7 @@
   transform-origin: center !important;
   transition: all ease .5s;
 }
-/* 
-#submit-login-form:focus {
-  outline: none !important;
-  box-shadow: none !important;
-} */
+
 #my-flashcards {
   margin: 0 auto!important;
   top: auto !important;
