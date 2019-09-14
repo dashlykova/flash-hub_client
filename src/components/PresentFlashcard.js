@@ -5,6 +5,7 @@ import Flashcard from "./Flashcard";
 import { Container, Button, Grid } from 'semantic-ui-react';
 import CategoryButtons from './CategoryButtons';
 
+
 export class PresentFlashcard extends Component {
   state = {
     flashcards: [],
@@ -84,7 +85,7 @@ export class PresentFlashcard extends Component {
           activeFlashcard: this.state.activeFlashcard + 1
         })
       }
-    })
+    });
   };
 
   render() {
@@ -109,18 +110,21 @@ export class PresentFlashcard extends Component {
         <Container>
             <Grid id='repeat' centered columns={20}>
               <Grid.Column verticalAlign='middle' width={40} >
-                  <Button onClick={() => this.repeatCurrentDeck()} 
-                    style={{ width: 200, height: 40 }}
-                    id="repeat-deck"
-                    basic color='red'
-                  >
-                    Repeat
+                <Button 
+                  onClick={() => this.repeatCurrentDeck()} 
+                  style={{ width: 200, height: 40 }}
+                  id="repeat-deck"
+                  basic color='red'
+                >
+                  Repeat
                 </Button>
-                  <Button onClick={() => this.getNewDeck()} 
-                    style={{ width: 200, height: 40 }}
-                    id="get-new-deck"
-                    basic color='green'>
-                    New Deck
+                <Button 
+                  onClick={() => this.getNewDeck()} 
+                  style={{ width: 200, height: 40 }}
+                  id="get-new-deck"
+                  basic color='green'
+                >
+                  New Deck
                 </Button>
               </Grid.Column>
             </Grid>
@@ -137,10 +141,10 @@ export class PresentFlashcard extends Component {
         </Container>
 
         <CategoryButtons
-          getCategoryDeck={this.state.getCategoryDeck} />
+          getCategoryDeck={this.getCategoryDeck} />
       </>
     )
-  }
-}
+  };
+};
 
-export default PresentFlashcard
+export default PresentFlashcard;

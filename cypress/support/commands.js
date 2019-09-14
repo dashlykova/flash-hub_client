@@ -1,25 +1,62 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This is will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add('user_successful_login', (email, password) => {
+  cy.route({
+    method: 'POST',
+    url: 'http://localhost:3000/api/auth/sign_in',
+    response: 'fixture:successful_user_login.json',
+    status: 200
+  });
+  cy.visit('http://localhost:3001');
+  cy.get('#login-button').click();
+  cy.get('#login-form').within(() => {
+    cy.get('#email').type(email);
+    cy.get('#password').type(password);
+  });
+  cy.get('#submit-login-form').click();
+});
+
+Cypress.Commands.add('user_unsuccessful_login', (email, password) => {
+  cy.route({
+    method: 'POST',
+    url: 'http://localhost:3000/api/auth/sign_in',
+    response: 'fixture:unsuccessful_user_login.json',
+    status: 422
+  });
+  cy.visit('http://localhost:3001');
+  cy.get('#login-button').click();
+  cy.get('#login-form').within(() => {
+    cy.get('#email').type(email);
+    cy.get('#password').type(password);
+  });
+  cy.get('#submit-login-form').click();
+});
+
+Cypress.Commands.add('successful_signup', (email, password, password_confirmation) => {
+  cy.route({
+    method: 'POST',
+    url: 'http://localhost:3000/api/auth',
+    response: 'fixture:successful_signup.json',
+    status: 200
+  });
+  cy.visit("http://localhost:3001");
+  cy.get('#signup-button').click();
+  cy.get('#signup-form').within(() => {
+    cy.get('input[id="email"]').type(email);
+    cy.get('input[id="password"]').type(password);
+    cy.get('input[id="password_confirmation"]').type(password_confirmation);
+  });
+});
+
+Cypress.Commands.add('unsuccessful_signup', (email, password) => {
+  cy.route({
+    method: 'POST',
+    url: 'http://localhost:3000/api/auth',
+    response: 'fixture:unsuccessful_signup.json',
+    status: 404
+  });
+  cy.visit("http://localhost:3001");
+  cy.get('#signup-button').click();
+  cy.get('#signup-form').within(() => {
+    cy.get('input[id="email"]').type(email);
+    cy.get('input[id="password"]').type(password);
+  });
+});
