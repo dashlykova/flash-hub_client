@@ -64,20 +64,6 @@ class Navbar extends Component {
               <li>Click green to continue learning!</li>
             </ul>
           </Modal>
-          <Menu.Item style={{ color: 'orange' }}
-            name='login'
-            active={activeItem === 'login'}
-            onClick={this.handleItemClick}
-          >
-            Log In
-          </Menu.Item>
-          <Menu.Item style={{ color: '#E58869' }}
-            name='signup'
-            active={activeItem === 'signup'}
-            onClick={this.handleItemClick}
-          >
-            Sign Up
-          </Menu.Item>
           {loginActions}
           {logoutActions}
           {userSavedFlashcards}
